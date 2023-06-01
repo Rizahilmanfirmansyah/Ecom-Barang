@@ -52,3 +52,10 @@ Route::get('edit-product/{product_id}', SellerEditProductComponent::class)->name
 //Route All
 Route::get('home', HomeComponent::class)->name('user.home');
 
+Route::group(['middleware' => ['auth']], function(){
+    Route::group(['middleware' => ['role:seller']], function(){
+       //barutest
+    });
+    Route::group(['middleware' => ['role:user']], function(){
+    });
+});
