@@ -76,6 +76,6 @@ class CartComponent extends Component
         {
             Cart::instance('belanjacart')->store(Auth::user()->email);
         }
-        return view('livewire.cart-component')->layout('layouts.app');
+        return view('livewire.cart-component')->layout('layouts.cart-style');
     }
 }
