@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Seller;
 
 use Livewire\Component;
 use App\Models\m_product;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 
 class SellerEditProductComponent extends Component
@@ -15,6 +17,7 @@ class SellerEditProductComponent extends Component
     public $foto_produk;
     public $harga_produk;
     public $stock_produk;
+    public $product_id;
     public $foto;
 
     public function mount($product_id)
@@ -37,9 +40,11 @@ class SellerEditProductComponent extends Component
         $product->stock_produk = $this->stock_produk;
         $product->harga_produk = $this->harga_produk;
         // $product->status = $this->status;
-        if ($this->foto) {
-            $imageName = Carbon::now()->timestamp. '.' . $this->$images->extension();
-            $this->$images->storeAs('product',$imageName);
+        if($this->foto) 
+        {
+            unlink('assets/images/product/'.$product->foto_produk);
+            $imageName = Carbon::now()->timestamp. '.' . $this->foto->extension();
+            $this->foto->storeAs('product',$imageName);
             $product->foto_produk = $imageName;
         }
         $product->save();

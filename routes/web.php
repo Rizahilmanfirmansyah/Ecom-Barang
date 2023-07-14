@@ -9,7 +9,16 @@ use App\Http\Controllers\User\indexController;
 use App\Http\Livewire\Seller\SellerAddProductComponent;
 use App\Http\Livewire\Seller\SellerEditProductComponent;
 use App\Http\Livewire\Seller\SellerAllProductComponent;
+use App\Http\Livewire\Seller\SellerDashboardComponent;
+//User
+use App\Http\Livewire\User\UserOrderDetailComponent;
+use App\Http\Livewire\MenuComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\CartComponent;
+use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\ThanksComponent;
+use App\Http\Livewire\ProductDetailComponent;
+
 
 
 
@@ -41,21 +50,30 @@ Route::post('aksilogin', [LoginController::class, 'aksilogin'])->name('aksilogin
 Route::get('dashboard', [DashController::class, 'index'])->name('index');
 Route::post('aksilogout', [LoginController::class, 'aksilogout'])->name('aksilogout');
 
-Route::get('reg', [RegisterController::class, 'index'])->name('index');
+Route::get('reg', [RegisterController::class, 'index'])->name('view.register');
 Route::post('aksireg', [RegisterController::class, 'aksireg'])->name('aksireg');
 
 //Route Seller
-Route::get('add-product', SellerAddProductComponent::class)->name('seller.add-product');
-Route::get('all-product', SellerAllProductComponent::class)->name('seller.all-product');
-Route::get('edit-product/{product_id}', SellerEditProductComponent::class)->name('seller.edit-product');
 
 //Route All
+Route::get('menu', MenuComponent::class)->name('user.menu');
 Route::get('home', HomeComponent::class)->name('user.home');
+Route::get('cart', CartComponent::class)->name('belanja.cart');
+Route::get('checkout', CheckoutComponent::class)->name('belanja.checkout');
+Route::get('thanks', ThanksComponent::class)->name('belanja.thanks');
+Route::get('/product-detail/{nama_produk}', ProductDetailComponent::class)->name('belanja.detail');
+
 
 Route::group(['middleware' => ['auth']], function(){
     Route::group(['middleware' => ['role:seller']], function(){
        //barutest
+       Route::get('dashboard-seller', SellerDashboardComponent::class)->name('seller.dashboard');
+       Route::get('add-product', SellerAddProductComponent::class)->name('seller.add-product');
+       Route::get('all-product', SellerAllProductComponent::class)->name('seller.all-product');
+       Route::get('edit-product/{product_id}', SellerEditProductComponent::class)->name('seller.edit-product');
     });
     Route::group(['middleware' => ['role:user']], function(){
+        Route::get('home', HomeComponent::class)->name('user.home');
+        Route::get('/detaiorder/{order_id}',UserOrderDetailComponent::class)->name('user.DetailOrder');
     });
 });

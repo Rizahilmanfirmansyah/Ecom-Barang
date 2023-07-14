@@ -12,9 +12,9 @@ class LoginController extends Controller
     {
         if ($user = Auth::user()) {
             if ($user->role = 'seller') {
-                return redirect()->intended('seller');
+                return redirect()->intended('all-product');
             }elseif($user->role = 'user'){
-                return redirect()->intended('user');
+                return redirect()->intended('home');
             }
         }
         return view('login');
@@ -32,15 +32,21 @@ class LoginController extends Controller
         if (Auth::attempt($check)) {
             $user = Auth::user();
             if ($user->role == 'seller') {
-                return redirect()->intended('seller');
+                return redirect()->intended('all-product');
             }elseif($user->role == 'user'){
-                return redirect()->intended('user');
+                return redirect()->intended('home');
             }
 
             return redirect()->intended('/');
         }
-        session()->flash('notif', 'Periksa Kembali');
+        session()->flash('notif', 'Periksa Kembali Username Dan Password Anda');
         return redirect('/');
 
+    }
+
+    public function aksilogout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

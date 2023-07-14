@@ -17,6 +17,7 @@ class SellerAddProductComponent extends Component
     public $foto_produk;
     public $stock_produk;
     public $harga_produk;
+    public $multi_images;
 
     public function mount()
     {
@@ -41,16 +42,29 @@ class SellerAddProductComponent extends Component
     {
         $this->validate();
         $product = new m_product();
-        // $product->id_seller = Auth::user()->id;
-        // $product->nama_penjual = Auth::user()->name;
+        $product->id_seller = Auth::user()->id;
+        $product->nama_penjual = Auth::user()->name;
         $product->nama_produk = $this->nama_produk;
         $product->desk_produk = $this->desk_produk;
         $product->stock_produk = $this->stock_produk;
         $product->harga_produk = $this->harga_produk;
         $product->status = $this->status;
+
         $imageName = Carbon::now()->timestamp. '.' . $this->foto_produk->extension();
         $this->foto_produk->storeAs('product',$imageName);
         $product->foto_produk = $imageName;
+
+        if ($this->multi_images) 
+        {
+            $imagesname = '';
+            foreach ($this->multi_images as $key=>$multi) {
+                $img = Carbon::now()->timestamp. $key. '.' . $multi->extension();
+                $multi->storeAs('product',$img);
+                $imagesname = $imagesname . ',' . $img;
+            }  
+            $product->multi_images = $imagesname;
+        }
+
         $product->save();
         session()->flash('message', 'sukses');
         return redirect()->route('seller.all-product');

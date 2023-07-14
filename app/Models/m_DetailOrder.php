@@ -13,11 +13,11 @@ class m_DetailOrder extends Model
 
     public function order()
     {
-        return $this->belongsTo(order::class);
+        return $this->belongsTo(m_order::class);
     }
 
     public function produk()
     {
-        return $this->belongsTo(product::class, 'id_produk');
+        return $this->belongsTo(m_product::class, 'id_produk');
     }
 }

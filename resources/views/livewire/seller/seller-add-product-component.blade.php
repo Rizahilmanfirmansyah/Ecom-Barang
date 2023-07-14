@@ -39,6 +39,16 @@
                             @endif
                         </div>
                         <div style="margin-top: 15px;">
+                            <div class="form-group">
+                                <label for="">MULTIPLE IMAGES</label>&nbsp;
+                                <input type="file" class="" wire:model="multi_images" multiple>
+                                <br>
+                                @if ($multi_images)
+                                    @foreach ($multi_images as $image)
+                                        <img src="{{$image->temporaryUrl()}}" width="120px" alt="">    
+                                    @endforeach
+                                @endif
+                            </div>
                         <button type="submit" class="btn btn-success">Add</button>
                     </div>
                     </form>

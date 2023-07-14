@@ -20,12 +20,12 @@ class m_order extends Model
     
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(m_DetailOrder::class);
     }
 
     public function pembayaran()
     {
-        return $this->hasOne(pembayaran::class);
+        return $this->hasOne(m_pembayaran::class);
     }
 
 }

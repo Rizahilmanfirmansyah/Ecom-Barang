@@ -13,7 +13,6 @@
        @livewireStyles
     </head>
     <body >
-        <h1>test</h1>
         {{$slot}}
     @livewireScripts
     </body>  

@@ -10,6 +10,6 @@ class m_product extends Model
     use HasFactory;
     protected $table = "tb_produk";
     protected $fillable = [
-        'nama_produk', 'desk_produk', 'foto_produk', 'stock_produk', 'harga_produk', 'status', 'created_at'
+        'nama_produk', 'desk_produk', 'foto_produk', 'multi_images', 'stock_produk', 'harga_produk', 'status', 'created_at'
     ];
 }

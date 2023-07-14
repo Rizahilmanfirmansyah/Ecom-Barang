@@ -12,6 +12,6 @@ class HomeComponent extends Component
         $products = m_product::all();
         return view('livewire.home-component', [
             'products' => $products
-        ])->layout('layouts.index');
+        ])->layout('layouts.e_user');
     }
 }

@@ -12,6 +12,6 @@ class m_pembayaran extends Model
 
     public function order()
     {
-        return $this->belongsTo(order::class);
+        return $this->belongsTo(m_order::class);
     }
 }

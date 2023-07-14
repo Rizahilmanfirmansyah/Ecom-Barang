@@ -27,10 +27,10 @@
                         </div>
                         <div class="form-group">
                             <label for="">FOTO</label>&nbsp;
-                            <input type="file" class="form" wire:model="foto_produk">
+                            <input type="file" class="form" name="foto_produk" wire:model="foto">
                             <br>
                             @if ($foto)
-                                <img src="{{$foto_produk->temporaryUrl()}}" width="120px" alt="">
+                                <img src="{{$foto->temporaryUrl()}}" width="120px" alt="">
                             @else
                                 <img src="{{asset('assets/images/product')}}/{{$foto_produk}}" width="120px" alt="">
                             @endif
