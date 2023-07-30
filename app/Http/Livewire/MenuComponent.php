@@ -26,6 +26,6 @@ class MenuComponent extends Component
         }
         return view('livewire.menu-component', [
             'products' => $products,
-        ])->layout('layouts.app');
+        ])->layout('layouts.all-style');
     }
 }

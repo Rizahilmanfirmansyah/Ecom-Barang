@@ -8,8 +8,8 @@
                         <strong class="card-title">Semua Product</strong>
                     </div>
                     <div class="card-body">
-                        @if(Session::has('message'))
-                        <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+                        @if(Session::has('notif'))
+                        <div class="alert alert-success" role="alert">{{Session::get('notif')}}</div>
                         @endif
                         <table id="data" class="table">
                             <thead>

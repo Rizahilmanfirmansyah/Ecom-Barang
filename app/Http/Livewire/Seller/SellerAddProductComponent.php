@@ -40,7 +40,9 @@ class SellerAddProductComponent extends Component
 
     public function addproduct()
     {
-        $this->validate();
+        // $this->validate([
+        //     'nama_produk' => 'required|string',
+        // ]);
         $product = new m_product();
         $product->id_seller = Auth::user()->id;
         $product->nama_penjual = Auth::user()->name;
@@ -66,7 +68,7 @@ class SellerAddProductComponent extends Component
         }
 
         $product->save();
-        session()->flash('message', 'sukses');
+        session()->flash('notif', ' Produk Berhasil Ditambahkan');
         return redirect()->route('seller.all-product');
 
     }

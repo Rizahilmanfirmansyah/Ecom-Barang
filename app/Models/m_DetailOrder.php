@@ -9,6 +9,9 @@ class m_DetailOrder extends Model
 {
     use HasFactory;
     protected $table = "order_detail";
+    protected $fillable = [
+        'id_seller', 'id_produk', 'order_id', 'harga', 'jumlah'
+    ];
     
 
     public function order()

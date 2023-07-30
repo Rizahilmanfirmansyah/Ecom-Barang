@@ -29,6 +29,9 @@
 							<input name="payment-method" id="payment-method-bank" value="cod" type="radio" wire:model="pembayaran">
 							<span>Cash On Delivery</span>
 							<span class="payment-desc">Pembayaran Mudah Dengan COD</span>
+							<p>
+								@error('pembayaran') <span class="error">{{$message}}</span>@enderror
+							</p>
 						{{-- <label class="payment-method">
 							<input name="payment-method" id="payment-method-visa" value="saldo" type="radio" wire:model="pembayaran">
 							<span>saldo</span>

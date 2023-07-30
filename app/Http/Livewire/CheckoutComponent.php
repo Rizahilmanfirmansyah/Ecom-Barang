@@ -18,13 +18,20 @@ class CheckoutComponent extends Component
     public $pembayaran;
     public $Thanks;
 
+    protected $messages = [
+        'pembayaran' => 'Mohon Untuk Ceklis',
+    ];
+
+
     public function placeOrder()
     {
         $this->validate([
             'nama' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'pembayaran' => 'required'
         ]);
 
+       
         foreach (Cart::instance('belanjacart')->content() as $item)
         {
             $order = new m_order();
@@ -36,12 +43,10 @@ class CheckoutComponent extends Component
             $order->tax = session()->get('checkout')['tax'];
             $order->total = session()->get('checkout')['total'];
             $order->nama = $this->nama;
+            $order->status = 'ordered';
             $order->alamat = $this->alamat;
             $order->save();
-        }
 
-        foreach (Cart::instance('belanjacart')->content() as $item)
-        {
             $detail_order = new m_DetailOrder();
             $detail_order->id_seller = $item->model->id_seller;
             $detail_order->id_produk = $item->id;
@@ -51,6 +56,11 @@ class CheckoutComponent extends Component
             $detail_order->save();
 
         }
+
+        // foreach (Cart::instance('belanjacart')->content() as $item)
+        // {
+           
+        // }
     
         if($this->pembayaran == 'cod')
         {
@@ -68,6 +78,6 @@ class CheckoutComponent extends Component
    
     public function render()
     {
-        return view('livewire.checkout-component')->layout('layouts.cart-style');
+        return view('livewire.checkout-component')->layout('layouts.all-style');
     }
 }

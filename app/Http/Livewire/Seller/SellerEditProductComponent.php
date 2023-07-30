@@ -20,6 +20,9 @@ class SellerEditProductComponent extends Component
     public $product_id;
     public $foto;
 
+    public $multi_images;
+    public $new_multi_images;
+
     public function mount($product_id)
     {
         $product = m_product::where('id', $product_id)->first();
@@ -28,9 +31,11 @@ class SellerEditProductComponent extends Component
         $this->foto_produk = $product->foto_produk;
         $this->stock_produk = $product->stock_produk;
         $this->harga_produk = $product->harga_produk;
+        $this->multi_images = explode(",",$product->multi_images);
         $this->product_id = $product->id;
 
     }
+    
 
     public function updateProduct()
     {
@@ -46,7 +51,31 @@ class SellerEditProductComponent extends Component
             $imageName = Carbon::now()->timestamp. '.' . $this->foto->extension();
             $this->foto->storeAs('product',$imageName);
             $product->foto_produk = $imageName;
+
         }
+
+        if($this->new_multi_images)
+        {
+            if($product->multi_images)
+            {
+                $multi_images = explode(",",$product->multi_images);
+                foreach ($multi_images as $image)
+                {
+                    if ($image)
+                    {
+                        unlink('assets/images/product'.'/'.$image);
+                    }
+                }
+            }
+            $imagesname = '';
+            foreach ($this->new_multi_images as $key=>$multi) {
+                $img = Carbon::now()->timestamp. $key. '.' . $multi->extension();
+                $multi->storeAs('product',$img);
+                $imagesname = $imagesname . ',' . $img;
+            }  
+            $product->multi_images = $imagesname;
+        }
+
         $product->save();
         session()->flash('notif', 'Product Berhasil Di Update');
         return redirect()->route('seller.all-product');

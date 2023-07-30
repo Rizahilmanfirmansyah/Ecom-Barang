@@ -10,9 +10,9 @@ class UserOrderComponent extends Component
 {
     public function render()
     {
-        $orders = m_order::where('id_user', Auth::user()->id)->paginate('10'); 
+        $orders = m_order::where('id_user', Auth::user()->id)->where('status', 'ordered')->paginate('10'); 
         return view('livewire.user.user-order-component',[
-            $orders => 'orders'
-        ]);
+            'orders' => $orders
+        ])->layout('layouts.e_user');
     }
 }

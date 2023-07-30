@@ -17,6 +17,6 @@ class ProductDetailComponent extends Component
     public function render()
     {
         $product = m_product::where('nama_produk', $this->nama_produk)->first();
-        return view('livewire.product-detail-component', ['product'=>$product])->layout('layouts.app');
+        return view('livewire.product-detail-component', ['product'=>$product])->layout('layouts.all-style');
     }
 }

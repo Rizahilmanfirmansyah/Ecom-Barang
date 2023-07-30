@@ -105,7 +105,7 @@
                     </li>
                     <li class="menu-title">Order</li><!-- /.menu-title -->
                     <li class="">
-                        <a href="{{route('seller.all-product')}}"><i class="menu-icon fa fa-cart-arrow-down"></i>
+                        <a href="{{route('seller.ordered')}}"><i class="menu-icon fa fa-cart-arrow-down"></i>
                             Pesanan Masuk
                             <span class="badge rounded-circle badge-notification text-light" style="background-color: #2FDBBC;">
                                 123

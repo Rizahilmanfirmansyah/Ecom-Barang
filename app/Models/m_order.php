@@ -9,8 +9,9 @@ class m_order extends Model
 {
     use HasFactory;
     protected $table = "tb_order";
+    // protected $primaryKey = "id";
     protected $fillable = [
-        'id_seller', 'id_user', 'nama', 'kelas', 'subtotal', 'discount', 'tax', 'total', 'status', 'note'
+        'id','id_seller', 'id_user', 'nama', 'kelas', 'subtotal', 'discount', 'tax', 'total', 'status', 'note'
     ];
     
     public function user()
@@ -20,7 +21,7 @@ class m_order extends Model
     
     public function orderItems()
     {
-        return $this->hasMany(m_DetailOrder::class);
+        return $this->hasMany(m_DetailOrder::class, 'order_id');
     }
 
     public function pembayaran()

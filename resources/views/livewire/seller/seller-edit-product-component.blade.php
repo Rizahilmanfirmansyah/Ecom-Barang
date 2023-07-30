@@ -35,6 +35,25 @@
                                 <img src="{{asset('assets/images/product')}}/{{$foto_produk}}" width="120px" alt="">
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="">MULTI IMAGES</label>&nbsp;
+                            <input type="file" class="form" name="multi_images" wire:model="new_multi_images" multiple>
+                            <br>
+                            @if ($new_multi_images)
+                            @foreach ($new_multi_images as $new_multi_image)
+                            @if ($new_multi_image)
+                            <img src="{{$new_multi_image->temporaryUrl()}}" width="120px" alt="">                                    
+                            @endif
+                            @endforeach    
+                            @else
+                            @foreach ($multi_images as $image)
+                            @if ($image)
+                            <img src="{{asset('assets/images/product')}}/{{$image}}" width="120px" alt="">                              
+                            @endif    
+                            @endforeach
+                            @endif
+                        </div>
+
                        <br>
                        <button type="submit" class="btn btn-success">Update</button>
                     </form>

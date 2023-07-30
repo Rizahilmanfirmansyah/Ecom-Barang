@@ -10,8 +10,13 @@ use App\Http\Livewire\Seller\SellerAddProductComponent;
 use App\Http\Livewire\Seller\SellerEditProductComponent;
 use App\Http\Livewire\Seller\SellerAllProductComponent;
 use App\Http\Livewire\Seller\SellerDashboardComponent;
+use App\Http\Livewire\Seller\SellerPesananMasukComponent;
+use App\Http\Livewire\Seller\SellerOrderDetailComponent;
 //User
 use App\Http\Livewire\User\UserOrderDetailComponent;
+use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\User\UserOrderComponent;
+use App\Http\Livewire\User\UserOrderReadyComponent;
 use App\Http\Livewire\MenuComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\CartComponent;
@@ -71,9 +76,14 @@ Route::group(['middleware' => ['auth']], function(){
        Route::get('add-product', SellerAddProductComponent::class)->name('seller.add-product');
        Route::get('all-product', SellerAllProductComponent::class)->name('seller.all-product');
        Route::get('edit-product/{product_id}', SellerEditProductComponent::class)->name('seller.edit-product');
+       Route::get('pesanan-masuk', SellerPesananMasukComponent::class)->name('seller.ordered');
+       Route::get('seller-detailOrder/{order_id}', SellerOrderDetailComponent::class)->name('seller.DetailOrder');
     });
     Route::group(['middleware' => ['role:user']], function(){
         Route::get('home', HomeComponent::class)->name('user.home');
-        Route::get('/detaiorder/{order_id}',UserOrderDetailComponent::class)->name('user.DetailOrder');
+        Route::get('user-dashboard', UserDashboardComponent::class)->name('user.dashboard');
+        Route::get('user-order', UserOrderComponent::class)->name('user.order');
+        Route::get('/detail_order/{order_id}',UserOrderDetailComponent::class)->name('user.DetailOrder');
+        Route::get('user-OrderReady',UserOrderReadyComponent::class)->name('user.order-ready');
     });
 });
