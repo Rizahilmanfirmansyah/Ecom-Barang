@@ -39,6 +39,10 @@ class SellerEditProductComponent extends Component
 
     public function updateProduct()
     {
+        $this->validate([
+            "nama_produk" => "required"
+        ]);
+        
         $product = m_product::find($this->product_id);
         $product->nama_produk = $this->nama_produk;
         $product->desk_produk = $this->desk_produk;

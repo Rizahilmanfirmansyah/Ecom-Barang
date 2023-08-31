@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-center">
                 <div class="card" style="width: 63rem;">
                     <div class="card-header">
-                        <strong class="card-title">Semua Product</strong>
+                        <strong class="card-title">Semua Product Test</strong>
                     </div>
                     <div class="card-body">
                         @if(Session::has('notif'))
@@ -44,4 +44,9 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready( function(){
+            $('#data').DataTable();
+        });
+    </script>
 </div>
